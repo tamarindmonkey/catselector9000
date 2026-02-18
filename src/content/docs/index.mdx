@@ -13,7 +13,7 @@ tableOfContents:
 ---
 
 import { Image } from 'astro:assets';
-import { Tabs, TabItem, Aside, Card, CardGrid, Badge } from '@astrojs/starlight/components';
+import { Tabs, TabItem, Aside, LinkCard, Card, CardGrid, Badge } from '@astrojs/starlight/components';
 
 {/* ── Abyssinian ─────────────────────────────────────────── */}
 import abyssinian01 from '../../assets/breeds/abyssinian-01.jpg';
@@ -120,7 +120,7 @@ import somali05 from '../../assets/breeds/somali-05.jpg';
 ## At a Glance
 
 <CardGrid>
-  <Card title="Abyssinian" icon="star" href="#abyssinian">
+  <LinkCard title="Abyssinian" icon="star" href="#abyssinian">
     **Lifespan:** 12–15 yrs<br />
     **Weight:** 8–12 lb<br />
     **Grooming:** Low<br />
@@ -128,8 +128,8 @@ import somali05 from '../../assets/breeds/somali-05.jpg';
     **Lap Cat:** Rarely<br />
     **Availability:** Common<br />
     <Badge text="Great for active owners" variant="success" />
-  </Card>
-  <Card title="Toyger" icon="star" href="#toyger">
+  </LinkCard>
+  <LinkCard title="Toyger" icon="star" href="#toyger">
     **Lifespan:** 10–15 yrs<br />
     **Weight:** 7–15 lb<br />
     **Grooming:** Low<br />
@@ -137,8 +137,8 @@ import somali05 from '../../assets/breeds/somali-05.jpg';
     **Lap Cat:** Moderate<br />
     **Availability:** Rare<br />
     <Badge text="Trainable & calm" variant="tip" />
-  </Card>
-  <Card title="Suphalak" icon="star" href="#suphalak">
+  </LinkCard>
+  <LinkCard title="Suphalak" icon="star" href="#suphalak">
     **Lifespan:** 12–15 yrs<br />
     **Weight:** 8–15 lb<br />
     **Grooming:** Low<br />
@@ -146,8 +146,8 @@ import somali05 from '../../assets/breeds/somali-05.jpg';
     **Lap Cat:** Yes<br />
     **Availability:** Extremely Rare<br />
     <Badge text="Ancient Thai heritage" variant="caution" />
-  </Card>
-  <Card title="Cornish Rex" icon="star" href="#cornish-rex">
+  </LinkCard>
+  <LinkCard title="Cornish Rex" icon="star" href="#cornish-rex">
     **Lifespan:** 11–15 yrs<br />
     **Weight:** 6–10 lb<br />
     **Grooming:** Very Low<br />
@@ -155,8 +155,8 @@ import somali05 from '../../assets/breeds/somali-05.jpg';
     **Lap Cat:** Yes<br />
     **Availability:** Common<br />
     <Badge text="Warmth-seeking & affectionate" variant="success" />
-  </Card>
-  <Card title="Somali (Ruddy)" icon="star" href="#somali-ruddy">
+  </LinkCard>
+  <LinkCard title="Somali (Ruddy)" icon="star" href="#somali-ruddy">
     **Lifespan:** 12–16 yrs<br />
     **Weight:** 8–12 lb<br />
     **Grooming:** Moderate<br />
@@ -164,7 +164,7 @@ import somali05 from '../../assets/breeds/somali-05.jpg';
     **Lap Cat:** Moderate<br />
     **Availability:** Common<br />
     <Badge text="Longest lifespan range" variant="tip" />
-  </Card>
+  </LinkCard>
 </CardGrid>
 
 ---
