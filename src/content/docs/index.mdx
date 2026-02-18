@@ -1,5 +1,5 @@
 ---
-title: Cat Selector 9000
+title: Favorite Cat Breeds — Comparison Guide
 description: >
   A comprehensive, evidence-backed comparison of five shortlisted cat breeds:
   Abyssinian, Toyger, Suphalak, Cornish Rex, and Somali (Ruddy). Covering
@@ -12,18 +12,43 @@ tableOfContents:
   maxHeadingLevel: 3
 ---
 
-import { Tabs, TabItem, Aside, Card, CardGrid, Badge, LinkCard } from '@astrojs/starlight/components';
+import { Image } from 'astro:assets';
+import { Tabs, TabItem, Aside, Card, CardGrid, Badge } from '@astrojs/starlight/components';
 
-{/*
-  ============================================================
-  IMAGE NOTE
-  ============================================================
-  All images below reference Wikimedia Commons via the stable
-  Special:FilePath redirect. For production, download each
-  image and place it in your /public/breeds/ directory, then
-  update the src paths to e.g. /breeds/abyssinian-01.jpg
-  ============================================================
-*/}
+{/* ── Abyssinian ─────────────────────────────────────────── */}
+import abyssinian01 from '../../assets/breeds/abyssinian-01.jpg';
+import abyssinian02 from '../../assets/breeds/abyssinian-02.jpg';
+import abyssinian03 from '../../assets/breeds/abyssinian-03.jpg';
+import abyssinian04 from '../../assets/breeds/abyssinian-04.jpg';
+import abyssinian05 from '../../assets/breeds/abyssinian-05.jpg';
+
+{/* ── Toyger ─────────────────────────────────────────────── */}
+import toyger01 from '../../assets/breeds/toyger-01.jpg';
+import toyger02 from '../../assets/breeds/toyger-02.jpg';
+import toyger03 from '../../assets/breeds/toyger-03.jpg';
+import toyger04 from '../../assets/breeds/toyger-04.jpg';
+import toyger05 from '../../assets/breeds/toyger-05.jpg';
+
+{/* ── Suphalak ───────────────────────────────────────────── */}
+import suphalak01 from '../../assets/breeds/suphalak-01.jpg';
+import suphalak02 from '../../assets/breeds/suphalak-02.jpg';
+import suphalak03 from '../../assets/breeds/suphalak-03.jpg';
+import suphalak04 from '../../assets/breeds/suphalak-04.jpg';
+import suphalak05 from '../../assets/breeds/suphalak-05.jpg';
+
+{/* ── Cornish Rex ────────────────────────────────────────── */}
+import cornishRex01 from '../../assets/breeds/cornish-rex-01.jpg';
+import cornishRex02 from '../../assets/breeds/cornish-rex-02.jpg';
+import cornishRex03 from '../../assets/breeds/cornish-rex-03.jpg';
+import cornishRex04 from '../../assets/breeds/cornish-rex-04.jpg';
+import cornishRex05 from '../../assets/breeds/cornish-rex-05.jpg';
+
+{/* ── Somali ─────────────────────────────────────────────── */}
+import somali01 from '../../assets/breeds/somali-01.jpg';
+import somali02 from '../../assets/breeds/somali-02.jpg';
+import somali03 from '../../assets/breeds/somali-03.jpg';
+import somali04 from '../../assets/breeds/somali-04.jpg';
+import somali05 from '../../assets/breeds/somali-05.jpg';
 
 <style>{`
   .breed-gallery {
@@ -39,7 +64,7 @@ import { Tabs, TabItem, Aside, Card, CardGrid, Badge, LinkCard } from '@astrojs/
     background: var(--sl-color-bg-nav);
     border: 1px solid var(--sl-color-hairline);
   }
-  .breed-gallery img {
+  .breed-gallery figure img {
     width: 100%;
     height: 220px;
     object-fit: cover;
@@ -69,26 +94,16 @@ import { Tabs, TabItem, Aside, Card, CardGrid, Badge, LinkCard } from '@astrojs/
     padding: 0.5rem 0.75rem;
     border-bottom: 1px solid var(--sl-color-hairline);
   }
-  .stat-table tr:last-child td {
-    border-bottom: none;
-  }
+  .stat-table tr:last-child td { border-bottom: none; }
   .pros-cons {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 1rem;
     margin: 1rem 0;
   }
-  .pros-cons-col h4 {
-    margin-top: 0;
-  }
-  .pros-cons-col ul {
-    margin-top: 0.5rem;
-    padding-left: 1.25rem;
-  }
-  .pros-cons-col li {
-    margin-bottom: 0.4rem;
-    font-size: 0.9rem;
-  }
+  .pros-cons-col h4 { margin-top: 0; }
+  .pros-cons-col ul { margin-top: 0.5rem; padding-left: 1.25rem; }
+  .pros-cons-col li { margin-bottom: 0.4rem; font-size: 0.9rem; }
   @media (max-width: 600px) {
     .pros-cons { grid-template-columns: 1fr; }
     .breed-gallery { grid-template-columns: 1fr 1fr; }
@@ -98,7 +113,7 @@ import { Tabs, TabItem, Aside, Card, CardGrid, Badge, LinkCard } from '@astrojs/
 <Aside type="note" title="About This Guide">
   This guide compares five shortlisted breeds to inform a new adoption decision. All health and
   behavioral data is evidence-backed, sourced from veterinary literature, TICA, CFA, and
-  peer-reviewed studies. See the [References](#references) section at the bottom for full citations.
+  peer-reviewed studies. See the [References](#references) section for full citations.
 </Aside>
 
 ---
@@ -144,49 +159,29 @@ import { Tabs, TabItem, Aside, Card, CardGrid, Badge, LinkCard } from '@astrojs/
 
 <div class="breed-gallery">
   <figure>
-    <img
-      src="https://commons.wikimedia.org/wiki/Special:FilePath/Abessinierkater1.jpg"
-      alt="Ruddy male Abyssinian cat with ticked coat and large erect ears"
-    />
+    <Image src={abyssinian01} alt="Ruddy male Abyssinian cat with ticked coat and large erect ears" />
     <figcaption>Classic ruddy male Abyssinian — the breed's signature ticked coat and large alert ears. (Wikimedia Commons, CC-BY-SA)</figcaption>
   </figure>
   <figure>
-    <img
-      src="https://commons.wikimedia.org/wiki/Special:FilePath/Gustav_chocolate.jpg"
-      alt="Chocolate Abyssinian cat Gustav"
-    />
+    <Image src={abyssinian02} alt="Chocolate Abyssinian cat Gustav showing multi-band ticking" />
     <figcaption>"Gustav," a chocolate Abyssinian, showing multi-band ticking on a warm base coat. (Wikimedia Commons, CC-BY-SA)</figcaption>
   </figure>
   <figure>
-    <img
-      src="https://commons.wikimedia.org/wiki/Special:FilePath/Abyssinian_ruddy_male.jpg"
-      alt="Abyssinian ruddy male showing lean muscular body and almond eyes"
-    />
+    <Image src={abyssinian03} alt="Abyssinian ruddy male showing lean muscular body and almond eyes" />
     <figcaption>Lean, fine-boned physique and gold-green almond eyes are hallmarks of the breed. (Wikimedia Commons, CC-BY-SA)</figcaption>
   </figure>
   <figure>
-    <img
-      src="https://commons.wikimedia.org/wiki/Special:FilePath/Abyssinian_Cat_Portrait.Idsfa.jpg"
-      alt="Close-up portrait of Abyssinian cat face"
-    />
+    <Image src={abyssinian04} alt="Close-up portrait of Abyssinian cat face and wedge-shaped head" />
     <figcaption>Close-up portrait highlighting the expressive face and moderately wedge-shaped head. (Wikimedia Commons, CC-BY-SA)</figcaption>
   </figure>
   <figure>
-    <img
-      src="https://commons.wikimedia.org/wiki/Special:FilePath/Abyssinian_cat_(Persephone).jpg"
-      alt="Female Abyssinian cat Persephone"
-    />
+    <Image src={abyssinian05} alt="Female Abyssinian cat Persephone resting" />
     <figcaption>A female Abyssinian at rest. Despite appearing relaxed, Abys are rarely truly idle. (Wikimedia Commons, CC-BY-SA)</figcaption>
   </figure>
 </div>
 
 <table class="stat-table">
-  <thead>
-    <tr>
-      <th>Attribute</th>
-      <th>Detail</th>
-    </tr>
-  </thead>
+  <thead><tr><th>Attribute</th><th>Detail</th></tr></thead>
   <tbody>
     <tr><td>**Origin**</td><td>Southeast Asia / Indian Ocean coast (genetic); introduced via Abyssinia (Ethiopia)</td></tr>
     <tr><td>**Recognized**</td><td>1929, Governing Council of the Cat Fancy (GCCF)</td></tr>
@@ -203,16 +198,15 @@ import { Tabs, TabItem, Aside, Card, CardGrid, Badge, LinkCard } from '@astrojs/
   <TabItem label="Overview">
     The **Abyssinian** is one of the oldest established domestic cat breeds. Genetic studies published
     in *Genomics* (Lipinski et al., 2008, UC Davis) place its origins in Southeast Asia and the coastal
-    Indian Ocean. First exhibited in England after specimens were brought from Abyssinia (present-day
-    Ethiopia) in 1868, the breed was formally recognized in 1929 by the GCCF. By 2016 it had climbed
-    into the top five most popular breeds in the United States.
+    Indian Ocean. First exhibited in England after specimens were brought from Abyssinia in 1868, the
+    breed was formally recognized in 1929 by the GCCF. By 2016 it had climbed into the top five most
+    popular breeds in the United States.
 
     The Abyssinian is lithe, fine-boned, and muscular, with a distinctive "ticked" tabby coat produced
     by the agouti gene — individual hairs carry three or four alternating colour bands, creating a warm,
-    shimmering, wild-cat appearance. Personality-wise, Abys are dog-like in their curiosity and loyalty:
-    they follow owners room-to-room, encourage play, and are rarely at rest.
+    shimmering, wild-cat appearance. Abys are dog-like in their curiosity and loyalty: they follow owners
+    room-to-room, encourage play, and are rarely at rest.
   </TabItem>
-
   <TabItem label="Pros & Cons">
     <div class="pros-cons">
       <div class="pros-cons-col">
@@ -220,10 +214,9 @@ import { Tabs, TabItem, Aside, Card, CardGrid, Badge, LinkCard } from '@astrojs/
         <ul>
           <li>Highly intelligent and trainable — picks up tricks, leash walking, and fetch rapidly</li>
           <li>Low-maintenance short coat; minimal shedding and almost no brushing required</li>
-          <li>Stunning, unique ticked coat with a wild-cat aesthetic unlike any other domestic breed</li>
+          <li>Stunning ticked coat with a wild-cat aesthetic unlike any other domestic breed</li>
           <li>Highly social; thrives in multi-cat households</li>
           <li>Readily available — widespread reputable breeders</li>
-          <li>Active and energetic; excellent companion for a dynamic household</li>
         </ul>
       </div>
       <div class="pros-cons-col">
@@ -231,57 +224,46 @@ import { Tabs, TabItem, Aside, Card, CardGrid, Badge, LinkCard } from '@astrojs/
         <ul>
           <li>Definitively **not** a lap cat — in near-constant motion</li>
           <li>Demanding of attention; destructive if understimulated</li>
-          <li>Poor tolerance of solitude; prone to stress-related anxiety and alopecia when alone</li>
+          <li>Poor tolerance of solitude; prone to stress-related anxiety and alopecia</li>
           <li>Significant hereditary health risks requiring genetic screening (PRA, PK Deficiency)</li>
-          <li>Can be reserved and shy with unfamiliar people despite high energy with family</li>
+          <li>Can be reserved and shy with unfamiliar people</li>
         </ul>
       </div>
     </div>
   </TabItem>
-
   <TabItem label="Health">
     <Aside type="caution" title="Genetic Testing is Essential">
-      Several of the following conditions have documented genetic bases in the Abyssinian.
       Always request PRA and PK Deficiency DNA test results from breeders before purchase.
     </Aside>
 
     | Condition | Notes |
     |---|---|
     | **Progressive Retinal Atrophy (PRA)** | Most-affected breed; two mutations: *CRX* gene (early-onset, dominant) and *CEP290* gene (late-onset, recessive). DNA tests commercially available. (Menotti-Raymond et al., 2010) |
-    | **Pyruvate Kinase (PK) Deficiency** | Hereditary haemolytic anaemia; autosomal recessive. PK-test screening of all breeding pairs is strongly recommended. |
+    | **Pyruvate Kinase (PK) Deficiency** | Hereditary haemolytic anaemia; autosomal recessive. PK-test screening of all breeding pairs strongly recommended. |
     | **Aortic Thromboembolism (ATE)** | Odds ratio of 6.03 vs. general cat population (Smith et al., *J Vet Intern Med*, 2003) |
     | **Renal Amyloidosis** | Reported in some family lines; causes progressive kidney failure |
     | **Feline Atopic Dermatitis / Psychogenic Alopecia** | Over-represented in dermatology referral caseloads |
     | **Acquired Myasthenia Gravis** | Documented predisposition; odds ratio of 4.97 vs. general population |
   </TabItem>
-
   <TabItem label="Diet & Care">
-    - **High-protein, animal-based diet** — minimum 30–40% protein on a dry-matter basis. Chicken,
-      turkey, or fish as the primary ingredient.
-    - **Include wet food** to maintain hydration and reduce the risk of lower urinary tract disease.
-    - **Portion control** is important despite their high activity level — they can over-eat freely.
-    - **Taurine** must be present in the diet; any AAFCO-complete commercial cat food satisfies this.
-    - No exotic breed-specific supplementation required beyond a quality complete diet.
-    - **Grooming:** Occasional light brushing (once weekly). Rarely needs bathing.
+    - **High-protein, animal-based diet** — minimum 30–40% protein on a dry-matter basis; chicken,
+      turkey, or fish as the primary ingredient
+    - **Include wet food** to maintain hydration and reduce risk of lower urinary tract disease
+    - **Portion control** is important — they can over-eat freely despite their activity level
+    - **Taurine** must be present; any AAFCO-complete commercial food satisfies this requirement
+    - **Grooming:** Occasional light brushing once weekly; rarely needs bathing
   </TabItem>
-
   <TabItem label="Play & Emotional Needs">
     **Emotional Needs**
-
-    - Requires consistent daily human interaction; a companion cat is strongly recommended for owners
-      who work long hours
-    - Environmental enrichment is essential — wall-mounted shelves, tall cat trees, window perches,
-      rotating puzzle feeders
-    - Becomes stressed in small, unstimulating spaces; may redirect anxiety into over-grooming or
-      vocalization
-    - Positive-reinforcement training sessions double as meaningful cognitive enrichment
+    - Requires consistent daily human interaction; companion cat strongly recommended for owners who work long hours
+    - Environmental enrichment is essential — wall-mounted shelves, tall cat trees, window perches, puzzle feeders
+    - Becomes stressed in small, unstimulating spaces; may redirect anxiety into over-grooming or vocalization
 
     **Playtime: 30–45 min/day (multiple sessions)**
-
     - Interactive wand toys, puzzle feeders, feather teasers, and fetch with lightweight balls
-    - Laser pointers work well — always end laser sessions with a tangible toy to "catch"
-    - Benefits from outdoor cat enclosures or leash walks if securely managed
-    - Rotate toys regularly; the Abyssinian is highly motivated by novelty
+    - Laser pointers work well — always end sessions with a tangible toy to "catch"
+    - Benefits from outdoor enclosures or leash walks if securely managed
+    - Rotate toys regularly; Abys are highly motivated by novelty
   </TabItem>
 </Tabs>
 
@@ -291,57 +273,37 @@ import { Tabs, TabItem, Aside, Card, CardGrid, Badge, LinkCard } from '@astrojs/
 
 <div class="breed-gallery">
   <figure>
-    <img
-      src="https://commons.wikimedia.org/wiki/Special:FilePath/Toyger.jpg"
-      alt="Toyger cat with bold tiger-stripe markings on orange-brown coat"
-    />
+    <Image src={toyger01} alt="Toyger cat with bold tiger-stripe markings on orange-brown coat" />
     <figcaption>Bold, branching vertical stripes over a deep orange-brown base — the Toyger's defining visual trait. (Wikimedia Commons, CC-BY-SA)</figcaption>
   </figure>
   <figure>
-    <img
-      src="https://commons.wikimedia.org/wiki/Special:FilePath/Toyger_cat_portrait.jpg"
-      alt="Toyger cat face close-up showing circular head markings and broad head"
-    />
+    <Image src={toyger02} alt="Toyger cat face close-up showing circular head markings and broad head" />
     <figcaption>The long, broad head and distinctive circular face markings differentiate the Toyger from ordinary mackerel tabbies. (Wikimedia Commons, CC-BY-SA)</figcaption>
   </figure>
   <figure>
-    <img
-      src="https://commons.wikimedia.org/wiki/Special:FilePath/Toyger1.jpg"
-      alt="Toyger full body showing low-slung muscular build and long thick tail"
-    />
+    <Image src={toyger03} alt="Toyger full body showing low-slung muscular build and long thick tail" />
     <figcaption>Full-body view showing the low-slung, muscular build and long thick tail bred to evoke the tiger silhouette. (Wikimedia Commons, CC-BY-SA)</figcaption>
   </figure>
   <figure>
-    <img
-      src="https://commons.wikimedia.org/wiki/Special:FilePath/Toyger_walking.jpg"
-      alt="Toyger cat walking showing rolling gait"
-    />
+    <Image src={toyger04} alt="Toyger cat walking showing rolling gait" />
     <figcaption>The rolling gait — a deliberate TICA breed standard trait — is best observed in motion. (Wikimedia Commons, CC-BY-SA)</figcaption>
   </figure>
   <figure>
-    <img
-      src="https://commons.wikimedia.org/wiki/Special:FilePath/Toyger_kitten.jpg"
-      alt="Young Toyger kitten with developing stripe pattern"
-    />
-    <figcaption>A Toyger kitten. The coat's glittered sheen and stripe definition continue developing through 18 months. (Wikimedia Commons, CC-BY-SA)</figcaption>
+    <Image src={toyger05} alt="Young Toyger kitten with developing stripe pattern and glittered coat" />
+    <figcaption>A Toyger kitten. Coat glitter and stripe definition continue developing through 18 months. (Wikimedia Commons, CC-BY-SA)</figcaption>
   </figure>
 </div>
 
 <table class="stat-table">
-  <thead>
-    <tr>
-      <th>Attribute</th>
-      <th>Detail</th>
-    </tr>
-  </thead>
+  <thead><tr><th>Attribute</th><th>Detail</th></tr></thead>
   <tbody>
-    <tr><td>**Origin**</td><td>United States — bred from domestic shorthair, Bengal, and Kashmiri street cat stock</td></tr>
+    <tr><td>**Origin**</td><td>United States — domestic shorthair, Bengal, and Kashmiri street cat stock</td></tr>
     <tr><td>**Recognized**</td><td>TICA Championship status, February 2007</td></tr>
     <tr><td>**Weight**</td><td>7–15 lb (3.2–6.8 kg)</td></tr>
     <tr><td>**Coat**</td><td>Short, dense; bold vertical stripes, glittered sheen</td></tr>
-    <tr><td>**Eye Colour**</td><td>Circular, small to medium; any colour except blue</td></tr>
+    <tr><td>**Eye Colour**</td><td>Small to medium; any colour except blue</td></tr>
     <tr><td>**Lifespan**</td><td>10–15 years</td></tr>
-    <tr><td>**Availability**</td><td>Rare — approximately 30 active breeders globally; expect waiting lists and $2,000–$5,000 USD</td></tr>
+    <tr><td>**Availability**</td><td>Rare — ~30 active breeders globally; waiting lists and $2,000–$5,000 USD</td></tr>
   </tbody>
 </table>
 
@@ -351,20 +313,16 @@ import { Tabs, TabItem, Aside, Card, CardGrid, Badge, LinkCard } from '@astrojs/
     1980s onward by breeder Judy Sugden (daughter of Bengal breed creator Jean Mill), its foundation
     stock included a striped domestic shorthair named Scrapmetal, a Bengal named Millwood Rumpled
     Spotskin, and a Kashmiri street cat named Jammu Blu. TICA granted full championship status in
-    February 2007.
-
-    As of 2024, roughly 30 active Toyger breeders are listed globally, making this a genuinely rare
-    breed. The Toyger was founded in part to raise public awareness of endangered wild tigers — a
-    meaningful conservation story embedded in the breed's origin.
+    February 2007. As of 2024, roughly 30 active Toyger breeders are listed globally. The breed was
+    founded in part to raise public awareness of endangered wild tigers.
   </TabItem>
-
   <TabItem label="Pros & Cons">
     <div class="pros-cons">
       <div class="pros-cons-col">
         #### ✅ Strengths
         <ul>
-          <li>Unparalleled aesthetic — bold branching stripes and glittered coat are unique among all domestic breeds</li>
-          <li>Exceptionally trainable — TICA breed standard explicitly includes trainability and quiet temperament as requirements</li>
+          <li>Unparalleled aesthetic — bold branching stripes and glittered coat unique among all domestic breeds</li>
+          <li>Exceptionally trainable — TICA breed standard explicitly includes trainability as a requirement</li>
           <li>Laid-back, adaptable personality despite its exotic appearance</li>
           <li>Tolerant of children, other cats, and cat-friendly dogs</li>
           <li>Moderate grooming — short coat needs only weekly brushing</li>
@@ -375,56 +333,45 @@ import { Tabs, TabItem, Aside, Card, CardGrid, Badge, LinkCard } from '@astrojs/
         #### ❌ Weaknesses
         <ul>
           <li>Extreme rarity — ~30 breeders worldwide; significant waiting lists and high cost</li>
-          <li>Prone to separation anxiety when left alone frequently; companion pet advisable</li>
-          <li>Emerging breed with limited long-term epidemiological health data</li>
+          <li>Prone to separation anxiety; companion pet strongly advisable</li>
+          <li>Young breed with limited long-term epidemiological health data</li>
           <li>Not recognized by CFA — show circuit options are limited</li>
           <li>Requires meaningful mental engagement; boredom leads to destructive behavior</li>
         </ul>
       </div>
     </div>
   </TabItem>
-
   <TabItem label="Health">
     <Aside type="caution" title="Young Breed — Limited Data">
-      Because the Toyger is a young breed, long-term epidemiological studies are limited.
-      Owners should maintain annual cardiac monitoring and work with breeders who conduct
-      active health screening.
+      Owners should maintain annual cardiac monitoring and work with breeders who conduct active
+      echocardiographic health screening.
     </Aside>
 
     | Condition | Notes |
     |---|---|
-    | **Hypertrophic Cardiomyopathy (HCM)** | Primary health concern; inherited from Bengal ancestry. Responsible breeders conduct echocardiographic screening of all breeding cats. Annual cardiac monitoring recommended for owned Toygers. |
+    | **Hypertrophic Cardiomyopathy (HCM)** | Primary health concern; inherited from Bengal ancestry. Responsible breeders conduct echocardiographic screening. Annual cardiac monitoring recommended. |
     | **Cataracts** | Elevated risk vs. general cat population; documented in veterinary literature |
-    | **Holoprosencephaly** | Rare neurological developmental defect linked to *GDF7* gene deletion; associated with breeding for short ears. Ethical breeders avoid this selection trait. |
+    | **Holoprosencephaly** | Rare neurological defect linked to *GDF7* gene deletion; associated with breeding for short ears. Ethical breeders avoid this trait. |
     | **Progressive Retinal Atrophy (PRA)** | Some risk inherited from Bengal ancestry; DNA testing available |
   </TabItem>
-
   <TabItem label="Diet & Care">
-    - **High-quality, high-protein diet** meeting AAFCO or FEDIAF complete-and-balanced standards.
-      Real meat or fish as the primary ingredient.
-    - **Combination of wet and dry food** — wet for hydration, dry for dental benefit.
-    - **Portion-controlled meals twice daily** (not free-fed); excess weight stresses joints in this
-      medium-to-large, active breed.
-    - Fresh water available at all times — active cats with higher muscle mass have elevated hydration
-      needs.
-    - No breed-specific supplementation required beyond a quality complete diet.
-    - **Grooming:** Short, dense coat — weekly light brushing is sufficient.
+    - **High-quality, high-protein diet** meeting AAFCO or FEDIAF complete-and-balanced standards
+    - **Combination of wet and dry food** — wet for hydration, dry for dental benefit
+    - **Portion-controlled meals twice daily** — not free-fed; excess weight stresses joints
+    - Fresh water available at all times
+    - **Grooming:** Weekly light brushing is sufficient for the short, dense coat
   </TabItem>
-
   <TabItem label="Play & Emotional Needs">
     **Emotional Needs**
-
     - Craves consistent companionship; bonds deeply with the entire family unit
-    - Not suited to being left alone all day without a feline or canine companion
-    - Calm, quiet home environments preferred — unpredictable noise and chaos causes stress
-    - Responds to positive, engaged attention; temperament can turn withdrawn if consistently ignored
+    - Not suited to being left alone all day without a companion pet
+    - Calm, quiet environments preferred — unpredictable noise and chaos causes stress
+    - Responds to positive, engaged attention; withdraws if consistently ignored
 
     **Playtime: 20–30 min/day (structured sessions)**
-
-    - Highly trainable for leash walks, fetch, agility, and exercise wheels (many Toygers use
-      exercise wheels spontaneously, per TICA)
-    - Puzzle feeders engage their intelligence and slow eating
-    - Cat trees and elevated perches allow natural observation behavior
+    - Highly trainable for leash walks, fetch, agility, and exercise wheels (per TICA)
+    - Puzzle feeders engage intelligence and slow eating
+    - Cat trees and elevated perches support natural observation behavior
     - Interactive wand toys and teaser toys satisfy hunting instincts
   </TabItem>
 </Tabs>
@@ -434,58 +381,38 @@ import { Tabs, TabItem, Aside, Card, CardGrid, Badge, LinkCard } from '@astrojs/
 ## 3. Suphalak
 
 <Aside type="caution" title="Availability Warning">
-  The Suphalak is among the rarest cat breeds on the planet. As of writing, meaningful
-  populations exist only in Thailand, with a tiny breeding group in the United States.
-  The first Suphalak born outside Thailand was a female born in the US on September 15, 2015.
-  Contact the **International Maew Boran Association (TIMBA)** at
-  [timba.info](https://timba.info) before attempting to source one.
+  The Suphalak is among the rarest cat breeds on the planet. Meaningful populations exist only
+  in Thailand, with a tiny breeding group in the United States. The first Suphalak born outside
+  Thailand was a female born in the US on September 15, 2015. Contact the
+  **International Maew Boran Association (TIMBA)** at [timba.info](https://timba.info) before
+  attempting to source one.
 </Aside>
 
 <div class="breed-gallery">
   <figure>
-    <img
-      src="https://commons.wikimedia.org/wiki/Special:FilePath/Suphalak_cat.jpg"
-      alt="Suphalak cat with solid reddish-copper coat and golden eyes"
-    />
+    <Image src={suphalak01} alt="Suphalak cat with solid reddish-copper coat and brilliant gold eyes" />
     <figcaption>The Suphalak's hallmark solid reddish-copper coat, brown whiskers, rosy-brown nose leather, and brilliant gold eyes — no tabby markings on a correctly-coloured Suphalak. (Wikimedia Commons, CC-BY-SA)</figcaption>
   </figure>
   <figure>
-    <img
-      src="https://commons.wikimedia.org/wiki/Special:FilePath/Suphalak.jpg"
-      alt="Suphalak cat Thai breed full body view"
-    />
+    <Image src={suphalak02} alt="Suphalak cat full body view showing modified wedge head and muscular build" />
     <figcaption>Full-body view showing the modified wedge-shaped head, medium-set ears, and muscular yet elegant body of this ancient Thai breed. (Wikimedia Commons, CC-BY-SA)</figcaption>
   </figure>
   <figure>
-    <img
-      src="https://commons.wikimedia.org/wiki/Special:FilePath/Thong_Daeng_Suphalak.jpg"
-      alt="Suphalak Thong Daeng copper cat"
-    />
+    <Image src={suphalak03} alt="Thong Daeng Suphalak copper cat in sunlight showing reddish-orange coat" />
     <figcaption>Known as "Thong Daeng" (Thai for copper), the coat appears reddish-orange in sunlight and deeper chocolate-brown in ambient light. (Wikimedia Commons, CC-BY-SA)</figcaption>
   </figure>
   <figure>
-    <img
-      src="https://commons.wikimedia.org/wiki/Special:FilePath/Suphalak_portrait.jpg"
-      alt="Suphalak cat face portrait showing golden amber eyes"
-    />
-    <figcaption>Golden-to-amber eyes and brown paw pads — traits described accurately in 18th-century Tamra Maew manuscripts centuries before Western breed registries existed. (Wikimedia Commons, CC-BY-SA)</figcaption>
+    <Image src={suphalak04} alt="Suphalak cat face portrait showing golden amber eyes" />
+    <figcaption>Golden-to-amber eyes and brown paw pads — traits described accurately in 18th-century Tamra Maew manuscripts. (Wikimedia Commons, CC-BY-SA)</figcaption>
   </figure>
   <figure>
-    <img
-      src="https://commons.wikimedia.org/wiki/Special:FilePath/Cat_Suphalak_The_Thai.jpg"
-      alt="Suphalak cat resting, showing copper coloring"
-    />
-    <figcaption>A Suphalak at rest. The coat colour extends uniformly to the skin — no dark points on face, ears, or extremities distinguishes a true Suphalak from lookalike breeds. (Wikimedia Commons / Pixabay)</figcaption>
+    <Image src={suphalak05} alt="Suphalak cat resting showing uniform copper coat with no dark points" />
+    <figcaption>The coat colour extends uniformly to the skin — no dark points on face, ears, or extremities is what distinguishes a true Suphalak from lookalike breeds. (Wikimedia Commons / Pixabay)</figcaption>
   </figure>
 </div>
 
 <table class="stat-table">
-  <thead>
-    <tr>
-      <th>Attribute</th>
-      <th>Detail</th>
-    </tr>
-  </thead>
+  <thead><tr><th>Attribute</th><th>Detail</th></tr></thead>
   <tbody>
     <tr><td>**Origin**</td><td>Thailand — documented in the Tamra Maew manuscripts, Ayutthaya Kingdom (1351–1767 AD)</td></tr>
     <tr><td>**Recognized**</td><td>TIMBA (International Maew Boran Association, est. 2014); limited Western registry recognition</td></tr>
@@ -503,13 +430,10 @@ import { Tabs, TabItem, Aside, Card, CardGrid, Badge, LinkCard } from '@astrojs/
     breed described in the *Tamra Maew* — Thai cat poems from the Ayutthaya Kingdom (1351–1767 AD)
     that compare the rarity of a true Suphalak to gold. It is genetically a chocolate self-coloured
     cat, requiring two recessive brown alleles (*b/b*) combined with dominant full-colour — a genetic
-    combination that arises with extraordinary rarity.
-
-    The Suphalak is often confused with the sable Burmese or the Havana Brown, but differs
-    fundamentally: a true Suphalak has a wholly solid copper-brown coat extending uniformly to the skin,
-    with no dark points on face, ears, or extremities whatsoever.
+    combination that arises with extraordinary rarity. It is often confused with the sable Burmese or
+    the Havana Brown, but a true Suphalak has a wholly solid copper-brown coat with no dark points on
+    face, ears, or extremities whatsoever.
   </TabItem>
-
   <TabItem label="Pros & Cons">
     <div class="pros-cons">
       <div class="pros-cons-col">
@@ -521,7 +445,6 @@ import { Tabs, TabItem, Aside, Card, CardGrid, Badge, LinkCard } from '@astrojs/
           <li>Trainable via positive reinforcement — learns recall, fetch, and household rules rapidly</li>
           <li>Robust natural genetic health (no concentrated engineered disease burdens)</li>
           <li>Low grooming maintenance — short silky coat needs only twice-weekly brushing</li>
-          <li>Good with families and other pets when well-socialized</li>
         </ul>
       </div>
       <div class="pros-cons-col">
@@ -531,51 +454,40 @@ import { Tabs, TabItem, Aside, Card, CardGrid, Badge, LinkCard } from '@astrojs/
           <li>Very limited veterinary research base — no large breed-specific disease studies yet</li>
           <li>Significant separation anxiety in deeply people-bonded individuals</li>
           <li>High energy demands — poor match for sedentary households</li>
-          <li>Acquiring one requires navigating TIMBA contacts, import logistics, and long waiting periods</li>
+          <li>Requires navigating TIMBA contacts, import logistics, and long waiting periods</li>
         </ul>
       </div>
     </div>
   </TabItem>
-
   <TabItem label="Health">
-    <Aside type="tip" title="Naturally Healthy — But Watch for Behavioral Health">
-      The Suphalak, as a natural breed with limited commercial crossbreeding, does not carry the
-      concentrated hereditary disease burdens seen in many engineered breeds. However, the population
-      is so small that comprehensive epidemiological data does not yet exist. The most documented
-      health risk is behavioral: separation anxiety.
+    <Aside type="tip" title="Naturally Healthy — But Watch Behavioral Health">
+      No documented breed-specific hereditary diseases as of current literature. The most
+      significant health risk is behavioral: separation anxiety.
     </Aside>
 
     | Condition | Notes |
     |---|---|
-    | **No documented breed-specific hereditary diseases** | As of current literature (Hepper Pet Resources, 2025; catbreedselector.com). Owners should monitor TIMBA and veterinary breed research as the population grows. |
+    | **No documented breed-specific hereditary diseases** | As of current literature (Hepper Pet Resources, 2025). Monitor TIMBA and veterinary breed research as the population grows. |
     | **Separation Anxiety** | A significant documented behavioral health concern in this deeply people-bonded breed |
-    | **General domestic cat risks** | Dental disease, obesity (if inactive), parasites, respiratory infections — manage via regular biannual veterinary check-ups |
+    | **General domestic cat risks** | Dental disease, obesity (if inactive), parasites — manage via biannual veterinary check-ups |
   </TabItem>
-
   <TabItem label="Diet & Care">
-    - **High-protein, obligate carnivore diet** — animal meat (chicken, turkey, fish) as the primary
-      ingredient in any AAFCO-complete commercial food.
-    - **Higher caloric intake** may be required compared to less active breeds, given elevated energy
-      levels (The Vet Desk, 2025).
-    - **Wet and dry food combination** to maintain hydration and kidney function.
-    - **Fresh water at all times** — critical for active cats with higher metabolic rates.
-    - No exotic breed-specific diet is required beyond a quality complete commercial food.
-    - **Grooming:** Twice-weekly brushing; short silky coat is easy to maintain.
+    - **High-protein, obligate carnivore diet** — animal meat as the primary ingredient in any AAFCO-complete commercial food
+    - **Higher caloric intake** may be required given elevated energy levels (The Vet Desk, 2025)
+    - **Wet and dry food combination** to maintain hydration and kidney function
+    - **Fresh water at all times** — critical for active cats with higher metabolic rates
+    - **Grooming:** Twice-weekly brushing; short silky coat is easy to maintain
   </TabItem>
-
   <TabItem label="Play & Emotional Needs">
     **Emotional Needs**
-
     - A deep human bond is essential — not suited to inattentive or frequently absent owners
-    - Should not be left alone all day without a feline companion or active enrichment program
-    - Thrives on consistent daily interaction: conversation, play, and physical contact
+    - Should not be left alone all day without a feline companion or enrichment program
     - Requires calm, loving household — punitive handling causes lasting anxiety
     - Positive reinforcement and approval-based training doubles as valuable bonding time
 
     **Playtime: 20–30 min/day (structured)**
-
     - Cat trees, climbing walls, and ample floor space for running are essential
-    - Interactive toys (wand toys, puzzle feeders, teaser toys) that engage their intelligence
+    - Interactive toys (wand toys, puzzle feeders) that engage their intelligence
     - Can learn fetch and recall-based games; integrate training into play sessions
     - Enrichment is not optional — an unstimulated Suphalak becomes an anxious Suphalak
   </TabItem>
@@ -587,49 +499,29 @@ import { Tabs, TabItem, Aside, Card, CardGrid, Badge, LinkCard } from '@astrojs/
 
 <div class="breed-gallery">
   <figure>
-    <img
-      src="https://commons.wikimedia.org/wiki/Special:FilePath/Cornish_rex_(cat).jpg"
-      alt="Cornish Rex cat showing curly wavy coat and large ears"
-    />
+    <Image src={cornishRex01} alt="Cornish Rex cat showing large high-set ears and soft wavy curly coat" />
     <figcaption>A Cornish Rex displaying large high-set ears, an egg-shaped head, and the characteristic soft, wavy coat — caused by a natural mutation in the KRT71 keratin gene. (Wikimedia Commons, CC-BY-SA)</figcaption>
   </figure>
   <figure>
-    <img
-      src="https://commons.wikimedia.org/wiki/Special:FilePath/Cornish_Rex_cat.jpg"
-      alt="Cornish Rex in profile showing arched body, slender legs, and whippy tail"
-    />
+    <Image src={cornishRex02} alt="Cornish Rex in profile showing dramatically arched back, slender legs, and whippy tail" />
     <figcaption>Profile view showing the dramatically arched back, tucked abdomen, slender legs, and long whippy tail — a body plan unlike any other domestic breed. (Wikimedia Commons, CC-BY-SA)</figcaption>
   </figure>
   <figure>
-    <img
-      src="https://commons.wikimedia.org/wiki/Special:FilePath/Cornish-rex-1.jpg"
-      alt="Cornish Rex face close-up with large oval eyes and prominent cheekbones"
-    />
+    <Image src={cornishRex03} alt="Cornish Rex face close-up with large oval eyes and prominent cheekbones" />
     <figcaption>Large oval eyes, prominent cheekbones, and a strong chin form the breed's distinctive "Renaissance greyhound" expression. (Wikimedia Commons, CC-BY-SA)</figcaption>
   </figure>
   <figure>
-    <img
-      src="https://commons.wikimedia.org/wiki/Special:FilePath/Cornish_Rex_kitten.jpg"
-      alt="Cornish Rex kitten with fine curly coat"
-    />
+    <Image src={cornishRex04} alt="Cornish Rex kitten with fine soft curly coat present from birth" />
     <figcaption>A Cornish Rex kitten — the soft, marcelled (wave-like) coat is present from birth. (Wikimedia Commons, CC-BY-SA)</figcaption>
   </figure>
   <figure>
-    <img
-      src="https://commons.wikimedia.org/wiki/Special:FilePath/Cornish_rex_cats.jpg"
-      alt="Multiple Cornish Rex cats of different colours and patterns"
-    />
+    <Image src={cornishRex05} alt="Multiple Cornish Rex cats of different colours and patterns" />
     <figcaption>Cornish Rexes come in virtually every colour and pattern recognized in domestic cats. (Wikimedia Commons, CC-BY-SA)</figcaption>
   </figure>
 </div>
 
 <table class="stat-table">
-  <thead>
-    <tr>
-      <th>Attribute</th>
-      <th>Detail</th>
-    </tr>
-  </thead>
+  <thead><tr><th>Attribute</th><th>Detail</th></tr></thead>
   <tbody>
     <tr><td>**Origin**</td><td>Bodmin Moor, Cornwall, England — natural mutation litter, July 21, 1950</td></tr>
     <tr><td>**Recognized**</td><td>CFA and TICA; all major international registries</td></tr>
@@ -643,26 +535,21 @@ import { Tabs, TabItem, Aside, Card, CardGrid, Badge, LinkCard } from '@astrojs/
 
 <Tabs>
   <TabItem label="Overview">
-    The **Cornish Rex** arose from a natural spontaneous mutation in a litter born on a farm in
-    Bodmin Moor, Cornwall on July 21, 1950. The founding kitten, Kallibunker, had a crimped, soft,
-    curly coat caused by a recessive mutation in the *KRT71* gene. Unlike the Devon Rex's structurally
-    different mutation, the Cornish Rex coat consists **only** of the fine, soft down undercoat —
-    the guard hairs and awn hairs are entirely absent — producing a coat often described as feeling
-    like warm crushed velvet or suede.
-
-    The breed is now well-established globally and recognized by all major registries. It is
-    frequently (and incorrectly) marketed as hypoallergenic — the Cornish Rex produces the same
-    Fel d 1 protein as other cats; only the reduced shedding may lessen, but never eliminate, exposure.
+    The **Cornish Rex** arose from a natural spontaneous mutation in a litter born on a farm in Bodmin
+    Moor, Cornwall on July 21, 1950. The founding kitten, Kallibunker, had a crimped coat caused by a
+    recessive mutation in the *KRT71* gene. The Cornish Rex coat consists **only** of the fine, soft
+    down undercoat — guard hairs and awn hairs are entirely absent — producing a coat often described
+    as warm crushed velvet or suede. It is frequently (and incorrectly) marketed as hypoallergenic;
+    the Cornish Rex produces the same Fel d 1 protein as other cats.
   </TabItem>
-
   <TabItem label="Pros & Cons">
     <div class="pros-cons">
       <div class="pros-cons-col">
         #### ✅ Strengths
         <ul>
-          <li>Uniquely soft coat — often described as crushed velvet or warm suede; minimal shedding</li>
-          <li>Highly affectionate and people-oriented; seeks physical contact and lap time actively</li>
-          <li>Kitten-like energy and playfulness that persists well into senior years</li>
+          <li>Uniquely soft coat — crushed velvet texture; minimal shedding vs. most breeds</li>
+          <li>Highly affectionate and people-oriented; actively seeks physical contact and lap time</li>
+          <li>Kitten-like playfulness persists well into senior years</li>
           <li>Extremely low coat maintenance — no brushing required</li>
           <li>Adapts well to indoor apartment life with adequate enrichment</li>
           <li>Trainable and intelligent — fetch, clicker training, leash walking all achievable</li>
@@ -674,62 +561,49 @@ import { Tabs, TabItem, Aside, Card, CardGrid, Badge, LinkCard } from '@astrojs/
         <ul>
           <li>Temperature sensitive — obsessively seeks heat; not suited to cold homes or climates</li>
           <li>Not hypoallergenic despite common claims — same Fel d 1 allergen as all domestic cats</li>
-          <li>Can develop greasy skin as sebum accumulates without guard hairs to wick it; occasional bathing required</li>
+          <li>Prone to greasy skin without guard hairs to wick sebum; periodic bathing required</li>
           <li>Sensitive skin — more susceptible to sunburn and abrasion</li>
-          <li>Demanding of attention; becomes unhappy and develops behavioral issues if consistently ignored</li>
+          <li>Becomes unhappy and develops behavioral issues if consistently ignored</li>
         </ul>
       </div>
     </div>
   </TabItem>
-
   <TabItem label="Health">
     <Aside type="caution" title="Anesthesia Sensitivity">
       Inform your veterinarian that your cat is a Cornish Rex before any procedure requiring
-      general anesthesia. Some reports suggest this breed may respond more sensitively to
-      certain anesthetic agents.
+      general anesthesia — some reports indicate heightened sensitivity to certain agents.
     </Aside>
 
     | Condition | Notes |
     |---|---|
-    | **Hypertrophic Cardiomyopathy (HCM)** | Most common cardiac disease in domestic cats; elevated breed predisposition in Cornish Rex. Echocardiographic screening of breeding cats strongly advised. |
-    | **Hereditary Myopathy** | Rare autosomal recessive muscular dystrophy variant documented in some Cornish Rex lines; causes progressive muscle weakness |
+    | **Hypertrophic Cardiomyopathy (HCM)** | Elevated breed predisposition. Echocardiographic screening of breeding cats strongly advised. |
+    | **Hereditary Myopathy** | Rare autosomal recessive muscular dystrophy variant documented in some Cornish Rex lines |
     | **Skin / Coat Issues** | Seborrhoea oleosa (oily skin) and UV radiation sensitivity due to absent guard hairs |
-    | **Dental / Periodontal Disease** | Common across breeds; dental hygiene from kittenhood is recommended |
+    | **Dental / Periodontal Disease** | Common across breeds; dental hygiene from kittenhood recommended |
     | **Patellar Luxation** | Reported in some lines |
     | **Anesthesia Sensitivity** | Inform veterinarians of breed prior to any procedure |
   </TabItem>
-
   <TabItem label="Diet & Care">
-    - **Higher caloric intake per pound** may be required — without guard hairs, the Cornish Rex
-      loses body heat faster and may burn slightly more calories maintaining core temperature.
-    - **High-quality protein-rich diet** — real meat or fish as primary ingredient.
-    - **Wet food inclusion** supports hydration and reduces urinary tract disease risk.
-    - **Portion-controlled meals** — despite high activity, free-feeding can lead to obesity.
-    - **Taurine, arachidonic acid, and vitamin A** must be present (met by any AAFCO-complete food).
-    - **Grooming:** No brushing required. Occasional gentle wipe-down or hand-groom. Bathe
-      periodically (every few weeks) to prevent sebum build-up on skin.
-    - **Keep warm** — heated beds, fleece blankets, and radiator perches are genuinely important
-      for this breed's comfort and wellbeing.
+    - **Slightly higher caloric intake per pound** may be required — without guard hairs, the Cornish Rex
+      loses body heat faster and may burn more calories maintaining core temperature
+    - **High-quality protein-rich diet** — real meat or fish as primary ingredient
+    - **Wet food inclusion** supports hydration and reduces urinary tract disease risk
+    - **Portion-controlled meals** — free-feeding can lead to obesity despite high activity
+    - **Grooming:** No brushing required. Gentle wipe-down or hand-groom. Periodic bathing (every
+      few weeks) to manage sebum build-up. Keep warm — heated beds are genuinely important.
   </TabItem>
-
   <TabItem label="Play & Emotional Needs">
     **Emotional Needs**
-
-    - Craves warmth both physically (heat sources, your lap) and emotionally (attention, play,
-      conversation)
+    - Craves warmth both physically (heat sources, your lap) and emotionally (attention, play, conversation)
     - Not suited to solitary living — does best with consistent human companionship or a cat companion
     - Highly tactile; thrives on stroking, grooming, and physical closeness
-    - Responds to its name and seeks eye contact — treat it as a companion, not furniture
-    - Intelligent enough to develop behavioral problems (vocalization, clinginess, minor destructiveness)
-      when emotionally neglected
+    - Develops behavioral problems (vocalization, clinginess, minor destructiveness) when emotionally neglected
 
     **Playtime: 30 min/day (spread across sessions)**
-
-    - Retains kitten-like play behaviors into senior years — never assume a 10-year-old Cornish Rex
-      has outgrown the need for play
+    - Retains kitten-like play into senior years — never assume a 10-year-old Cornish Rex has outgrown play
     - Highly motivated by interactive wand toys, feather teasers, and fetch with lightweight balls
     - Puzzle feeders engage intelligence and help manage eating pace
-    - Warm, padded cat trees and heated perches satisfy both play and thermoregulation needs
+    - Warm, padded cat trees and heated perches satisfy both play and thermoregulation needs simultaneously
   </TabItem>
 </Tabs>
 
@@ -739,51 +613,31 @@ import { Tabs, TabItem, Aside, Card, CardGrid, Badge, LinkCard } from '@astrojs/
 
 <div class="breed-gallery">
   <figure>
-    <img
-      src="https://commons.wikimedia.org/wiki/Special:FilePath/Somali_Katze.jpg"
-      alt="Ruddy Somali cat with full semi-long flowing coat and bushy fox tail"
-    />
+    <Image src={somali01} alt="Ruddy Somali cat with full semi-long flowing coat, bushy fox tail, and ear tufts" />
     <figcaption>A ruddy Somali showing the breed's "fox-like" appearance — ticked semi-long coat, full brush tail, pronounced ear tufts, and ruff. (Wikimedia Commons, CC-BY-SA)</figcaption>
   </figure>
   <figure>
-    <img
-      src="https://commons.wikimedia.org/wiki/Special:FilePath/Ruddy_Somali_cat.jpg"
-      alt="Ruddy Somali cat in natural light showing warm reddish-brown ticking"
-    />
-    <figcaption>In natural light, the ruddy Somali's warm reddish-brown base coat with black ticking glows with a fire-toned shimmer intensified by the longer coat. (Wikimedia Commons, CC-BY-SA)</figcaption>
+    <Image src={somali02} alt="Ruddy Somali cat in natural light showing warm reddish-brown ticking" />
+    <figcaption>In natural light, the ruddy Somali's reddish-brown base coat with black ticking glows with a fire-toned shimmer intensified by the longer coat. (Wikimedia Commons, CC-BY-SA)</figcaption>
   </figure>
   <figure>
-    <img
-      src="https://commons.wikimedia.org/wiki/Special:FilePath/Somali_cat_breed.jpg"
-      alt="Somali cat showing alert expression, tufted ears, and gold-green eyes"
-    />
+    <Image src={somali03} alt="Somali cat showing alert expression, heavily tufted ears, and gold-green eyes" />
     <figcaption>Profile view emphasizing the Somali's large, heavily tufted ears and expressive almond-shaped gold-to-green eyes. (Wikimedia Commons, CC-BY-SA)</figcaption>
   </figure>
   <figure>
-    <img
-      src="https://commons.wikimedia.org/wiki/Special:FilePath/Somali_cat_ruddy.jpg"
-      alt="Ruddy Somali cat in full body stance showing bushy fox-like tail"
-    />
+    <Image src={somali04} alt="Ruddy Somali cat in full body stance showing bushy fox-like tail" />
     <figcaption>The iconic "fox tail" — a full, heavily plumed tail that is one of the Somali's most visually distinctive features. (Wikimedia Commons, CC-BY-SA)</figcaption>
   </figure>
   <figure>
-    <img
-      src="https://commons.wikimedia.org/wiki/Special:FilePath/Somali_kitten.jpg"
-      alt="Somali kitten with developing ticked coat and large ears"
-    />
+    <Image src={somali05} alt="Young Somali kitten with developing ticked coat and large ears" />
     <figcaption>A young Somali kitten. Full coat length and ticking continue to develop through 18 months; final coat quality is not assessed until maturity. (Wikimedia Commons, CC-BY-SA)</figcaption>
   </figure>
 </div>
 
 <table class="stat-table">
-  <thead>
-    <tr>
-      <th>Attribute</th>
-      <th>Detail</th>
-    </tr>
-  </thead>
+  <thead><tr><th>Attribute</th><th>Detail</th></tr></thead>
   <tbody>
-    <tr><td>**Origin**</td><td>United States / Canada — semi-longhaired variant of the Abyssinian; selectively bred from the 1960s onward</td></tr>
+    <tr><td>**Origin**</td><td>United States / Canada — semi-longhaired variant of the Abyssinian; selectively bred from the 1960s</td></tr>
     <tr><td>**Recognized**</td><td>CFA, TICA, and all major international registries</td></tr>
     <tr><td>**Weight**</td><td>8–12 lb (3.6–5.4 kg)</td></tr>
     <tr><td>**Coat**</td><td>Semi-long, ticked/agouti; full brush tail, ear tufts, ruff, and tufted paws</td></tr>
@@ -797,93 +651,73 @@ import { Tabs, TabItem, Aside, Card, CardGrid, Badge, LinkCard } from '@astrojs/
   <TabItem label="Overview">
     The **Somali** is the semi-longhaired variant of the Abyssinian, produced by a naturally occurring
     recessive longhair gene (*M/l* allele) that had been present but suppressed in Abyssinian breeding
-    stock for decades. Selectively bred from the 1960s and 1970s by breeders including Evelyn Mague
-    (US) and Janet Robertson (Canada), the Somali is now fully recognized by all major registries.
-
-    The **ruddy** colourway — a warm reddish-brown base coat with black ticking, a black tail tip,
-    and dark heels — is the original and most iconic expression. Somalis share nearly all temperament
-    traits with the Abyssinian, distinguished primarily by their flowing coat, full brush tail, ear
-    tufts, ruff, and a somewhat longer documented lifespan range.
+    stock for decades. Selectively bred from the 1960s and 1970s by breeders including Evelyn Mague (US)
+    and Janet Robertson (Canada), the Somali is now fully recognized by all major registries. The
+    **ruddy** colourway — a warm reddish-brown base with black ticking, a black tail tip, and dark heels
+    — is the original and most iconic expression.
   </TabItem>
-
   <TabItem label="Pros & Cons">
     <div class="pros-cons">
       <div class="pros-cons-col">
         #### ✅ Strengths
         <ul>
-          <li>Stunning "little fox" appearance — bushy tail, ear tufts, ticked coat, and amber-to-green eyes create a dramatic natural look</li>
+          <li>Stunning "little fox" appearance — bushy tail, ear tufts, ticked coat, and amber-to-green eyes</li>
           <li>Playful, dog-like personality identical to the Abyssinian — always nearby, always engaged</li>
           <li>Longest lifespan range on this shortlist (12–16 years)</li>
           <li>Highly intelligent and trainable — leash walking, fetch, and tricks all achievable</li>
-          <li>More vertical-enrichment oriented than Abyssinians — easier to redirect into cat trees</li>
-          <li>Good with children and other pets in multi-animal households</li>
-          <li>Moderate vocalization — communicative but not excessively loud</li>
+          <li>More vertical-enrichment oriented than Abyssinians; easier to redirect into cat trees</li>
+          <li>Good with children and other pets; moderate vocalization</li>
         </ul>
       </div>
       <div class="pros-cons-col">
         #### ❌ Weaknesses
         <ul>
-          <li>Grooming commitment — semi-long coat requires 2–3 brushings per week minimum; neglect causes tangles</li>
+          <li>Grooming commitment — semi-long coat requires 2–3 brushings per week minimum</li>
           <li>Sheds more than shorthaired breeds; seasonal coat shed can be significant</li>
-          <li>Shares Abyssinian hereditary disease risks — genetic testing of breeding stock is essential</li>
+          <li>Shares all Abyssinian hereditary disease risks — genetic testing of breeding stock essential</li>
           <li>Not a lap cat by default; prefers proximity to being on you</li>
           <li>Requires substantial activity and enrichment — sedentary households are a poor match</li>
-          <li>Seasonal coat changes can be dramatic; full show-coat conditioning requires dietary and grooming investment</li>
         </ul>
       </div>
     </div>
   </TabItem>
-
   <TabItem label="Health">
     <Aside type="caution" title="Shares Abyssinian Hereditary Risks">
       As a genetic derivative of the Abyssinian, the Somali carries the same PRA and PK Deficiency
-      predispositions. Request DNA test results from breeders and budget for annual veterinary
-      dental prophylaxis.
+      predispositions. Request DNA test results from breeders and budget for annual dental prophylaxis.
     </Aside>
 
     | Condition | Notes |
     |---|---|
-    | **Progressive Retinal Atrophy (PRA)** | Shares Abyssinian susceptibility via *CRX* (early-onset, dominant) and *CEP290* (late-onset, recessive) mutations. DNA testing of breeding cats available and strongly recommended. (Menotti-Raymond et al., 2010) |
-    | **Pyruvate Kinase (PK) Deficiency** | Hereditary haemolytic anaemia from recessive *PKLR* gene mutation. Commercially available DNA test; responsible breeders screen all breeding stock. |
+    | **Progressive Retinal Atrophy (PRA)** | Shares Abyssinian susceptibility via *CRX* (early-onset, dominant) and *CEP290* (late-onset, recessive) mutations. DNA testing strongly recommended. (Menotti-Raymond et al., 2010) |
+    | **Pyruvate Kinase (PK) Deficiency** | Hereditary haemolytic anaemia from recessive *PKLR* gene mutation. Commercially available DNA test. |
     | **Renal Amyloidosis** | Documented in some Somali lines; causes progressive chronic kidney disease |
     | **Feline Atopic Dermatitis** | Reported in Somalis, consistent with Abyssinian predisposition |
-    | **Chronic Gingivitis / Stomatitis** | Reported at higher rates in the Abyssinian/Somali group than in the broader cat population; regular dental prophylaxis critical |
+    | **Chronic Gingivitis / Stomatitis** | Reported at higher rates in the Abyssinian/Somali group; regular dental prophylaxis critical |
   </TabItem>
-
   <TabItem label="Diet & Care">
     - **High-quality, high-protein diet** — minimum 30–35% protein on dry-matter basis; real poultry,
-      fish, or meat as the first ingredient.
-    - **Wet food is highly advisable** — Somalis are prone to renal conditions; a moisture-rich diet
-      actively supports kidney health.
-    - **Omega-3 fatty acids** (e.g., fish oil or salmon-containing foods) support coat quality and
-      reduce inflammatory skin conditions — particularly relevant given the dermatitis predisposition.
-    - **Healthy weight maintenance** — excess body weight compounds stress on kidneys and joints.
-    - **Taurine, arachidonic acid, and vitamin A** must be present (met by any AAFCO-complete food).
+      fish, or meat as the first ingredient
+    - **Wet food is highly advisable** — Somalis are prone to renal conditions; moisture-rich diet
+      actively supports kidney health
+    - **Omega-3 fatty acids** (fish oil or salmon-containing foods) support coat quality and reduce
+      inflammatory skin conditions
     - **Grooming:** 2–3 brushings per week with a stainless steel comb and soft slicker brush. The
-      coat is single-layered and less prone to matting than some longhaired breeds, but the ruff and
-      flanks are tangle-prone. Seasonal shedding periods may require daily brushing.
+      ruff and flanks are tangle-prone. Seasonal shedding periods may require daily brushing.
   </TabItem>
-
   <TabItem label="Play & Emotional Needs">
     **Emotional Needs**
-
     - Highly social and emotionally engaged — consistent human presence and interaction is essential
     - A companion cat is strongly recommended for owners who work outside the home
-    - Sensitive to environmental stress — major changes (new homes, loud noise, prolonged isolation)
-      can manifest as over-grooming or appetite changes
-    - Not the cat to adopt if you want minimal interaction; thrives on being included in household
-      activity
-    - Though not classic lap cats, Somalis develop strong proximity bonds — your shadow with better fur
+    - Sensitive to environmental stress — major changes can manifest as over-grooming or appetite changes
+    - Develops strong proximity bonds — your shadow with better fur
 
     **Playtime: 30–45 min/day (two sessions recommended)**
-
     - Highly motivated by wand toys, feather teasers, and prey-mimicking erratic fast movements
     - **Vertical enrichment is key** — tall cat trees, wall-mounted shelves, and window hammocks satisfy
       the Somali's deep exploratory instinct
     - Leash training is feasible and highly recommended as a safe energy outlet
-    - Puzzle feeders and snuffle mats extend engagement between active play sessions
-    - Long-lived breed — play needs remain significant well into their teenage years; don't scale back
-      too early
+    - Long-lived breed — play needs remain significant well into their teenage years; don't scale back too early
   </TabItem>
 </Tabs>
 
@@ -907,7 +741,7 @@ import { Tabs, TabItem, Aside, Card, CardGrid, Badge, LinkCard } from '@astrojs/
     Exceptional looks, calm disposition, and TICA-standard trainability. Leash walks, fetch, and
     agility are all realistic goals.
   </Card>
-  <Card title="You want wild looks + low grooming" icon="seti:svg">
+  <Card title="You want wild looks + low grooming" icon="sun">
     **Best fit:** Abyssinian  
     The wild-cat ticked coat requires almost no maintenance. Be prepared to provide 45 min/day of
     active engagement in return.
@@ -919,13 +753,11 @@ import { Tabs, TabItem, Aside, Card, CardGrid, Badge, LinkCard } from '@astrojs/
   </Card>
   <Card title="You have children / other pets" icon="group">
     **Best fits:** Toyger, Somali, Cornish Rex  
-    All three have well-documented tolerance of multi-pet and family households. The Toyger is
-    particularly noted for its calm, even-tempered family disposition.
+    All three have well-documented tolerance of multi-pet and family households.
   </Card>
   <Card title="You want rare / extraordinary provenance" icon="star">
     **Best fit:** Suphalak  
-    An ancient living heritage breed documented in 18th-century royal manuscripts. Extraordinary
-    rarity, history, and personality — if you can find one.
+    An ancient living heritage breed documented in 18th-century royal manuscripts — if you can find one.
   </Card>
 </CardGrid>
 
@@ -933,17 +765,13 @@ import { Tabs, TabItem, Aside, Card, CardGrid, Badge, LinkCard } from '@astrojs/
 
 ## References
 
-- Lipinski, M.J. et al. (2008). *The Ascent of Cat Breeds: Genetic Evaluations of Breeds and
-  Worldwide Random-bred Populations.* **Genomics** 91(1):12–21.
-- Menotti-Raymond, M. et al. (2010). *Widespread retinal degenerative disease mutation (rdAc)
-  discovered among a large number of popular cat breeds.* **Veterinary Journal** 186(1):32–38.
-- Smith, S.A. et al. (2003). *Arterial thromboembolism in cats: acute crisis in 127 cases
-  (1992–2001) and long-term management with low-dose aspirin in 24 cases.* **Journal of Veterinary
-  Internal Medicine** 17(1):73–83.
+- Lipinski, M.J. et al. (2008). *The Ascent of Cat Breeds: Genetic Evaluations of Breeds and Worldwide Random-bred Populations.* **Genomics** 91(1):12–21.
+- Menotti-Raymond, M. et al. (2010). *Widespread retinal degenerative disease mutation (rdAc) discovered among a large number of popular cat breeds.* **Veterinary Journal** 186(1):32–38.
+- Smith, S.A. et al. (2003). *Arterial thromboembolism in cats: acute crisis in 127 cases (1992–2001).* **Journal of Veterinary Internal Medicine** 17(1):73–83.
 - The International Cat Association (TICA). Breed Standards. [tica.org](https://tica.org)
 - Cat Fanciers' Association (CFA). Breed Profiles. [cfa.org](https://cfa.org)
 - The International Maew Boran Association (TIMBA). [timba.info](https://timba.info)
-- Governing Council of the Cat Fancy (GCCF). Breed Standards. [gccfcats.org](https://www.gccfcats.org)
+- Governing Council of the Cat Fancy (GCCF). [gccfcats.org](https://www.gccfcats.org)
 
 ---
 
