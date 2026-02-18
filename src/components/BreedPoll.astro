@@ -1,0 +1,503 @@
+// src/components/BreedPoll.astro
+---
+// No server-side props needed — all data fetching happens client-side
+// so the component works on GitHub Pages (static hosting)
+---
+
+<div id="breed-poll" class="poll-wrapper" aria-live="polite">
+  <div id="poll-loading" class="poll-state">
+    <div class="poll-spinner" aria-label="Loading poll…"></div>
+  </div>
+
+  <div id="poll-vote" class="poll-state" hidden>
+    <p class="poll-question">Which breed would be your next companion?</p>
+    <div class="poll-options" role="radiogroup" aria-label="Breed choices">
+      <button class="poll-option" data-breed="abyssinian">
+        <span class="option-icon">🐈</span>
+        <span class="option-label">Abyssinian</span>
+        <span class="option-arrow">→</span>
+      </button>
+      <button class="poll-option" data-breed="toyger">
+        <span class="option-icon">🐯</span>
+        <span class="option-label">Toyger</span>
+        <span class="option-arrow">→</span>
+      </button>
+      <button class="poll-option" data-breed="suphalak">
+        <span class="option-icon">✨</span>
+        <span class="option-label">Suphalak</span>
+        <span class="option-arrow">→</span>
+      </button>
+      <button class="poll-option" data-breed="cornish_rex">
+        <span class="option-icon">🌀</span>
+        <span class="option-label">Cornish Rex</span>
+        <span class="option-arrow">→</span>
+      </button>
+      <button class="poll-option" data-breed="somali">
+        <span class="option-icon">🦊</span>
+        <span class="option-label">Somali (Ruddy)</span>
+        <span class="option-arrow">→</span>
+      </button>
+    </div>
+  </div>
+
+  <div id="poll-results" class="poll-state" hidden>
+    <p class="poll-question">Community results</p>
+    <div id="poll-bars" class="poll-bars"></div>
+    <p id="poll-total" class="poll-total"></p>
+    <p id="poll-voted-msg" class="poll-voted-msg" hidden></p>
+  </div>
+
+  <div id="poll-error" class="poll-state" hidden>
+    <p class="poll-error-msg">
+      Something went wrong loading the poll. Check your Supabase environment
+      variables and that the <code>votes</code> table exists.
+    </p>
+  </div>
+</div>
+
+<style>
+  .poll-wrapper {
+    max-width: 540px;
+    margin: 2rem auto;
+    font-family: inherit;
+  }
+
+  /* ── Loading ─────────────────────────────────────────────── */
+  .poll-spinner {
+    width: 36px;
+    height: 36px;
+    border: 3px solid var(--sl-color-hairline);
+    border-top-color: var(--sl-color-accent);
+    border-radius: 50%;
+    animation: spin 0.75s linear infinite;
+    margin: 2rem auto;
+  }
+  @keyframes spin { to { transform: rotate(360deg); } }
+
+  /* ── Shared state wrapper ────────────────────────────────── */
+  .poll-state[hidden] { display: none !important; }
+
+  /* ── Question label ──────────────────────────────────────── */
+  .poll-question {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--sl-color-text-accent);
+    margin: 0 0 1rem;
+    letter-spacing: 0.01em;
+  }
+
+  /* ── Vote buttons ────────────────────────────────────────── */
+  .poll-options {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .poll-option {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    width: 100%;
+    padding: 0.75rem 1rem;
+    background: var(--sl-color-bg-nav);
+    border: 1px solid var(--sl-color-hairline);
+    border-radius: 8px;
+    color: var(--sl-color-text);
+    font-size: 0.95rem;
+    font-family: inherit;
+    cursor: pointer;
+    text-align: left;
+    transition: border-color 0.15s, background 0.15s, transform 0.1s;
+  }
+  .poll-option:hover {
+    border-color: var(--sl-color-accent);
+    background: var(--sl-color-bg-sidebar);
+    transform: translateX(3px);
+  }
+  .poll-option:active { transform: translateX(1px); }
+  .poll-option:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    transform: none;
+  }
+
+  .option-icon { font-size: 1.25rem; flex-shrink: 0; }
+  .option-label { flex: 1; font-weight: 500; }
+  .option-arrow {
+    color: var(--sl-color-accent);
+    font-size: 1rem;
+    opacity: 0;
+    transition: opacity 0.15s;
+  }
+  .poll-option:hover .option-arrow { opacity: 1; }
+
+  /* ── Results bars ────────────────────────────────────────── */
+  .poll-bars {
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+    margin-bottom: 1rem;
+  }
+
+  .poll-bar-row {
+    display: grid;
+    grid-template-columns: 130px 1fr 40px;
+    align-items: center;
+    gap: 0.6rem;
+    font-size: 0.88rem;
+  }
+
+  .bar-label {
+    font-weight: 500;
+    color: var(--sl-color-text);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .bar-label.is-winner {
+    color: var(--sl-color-accent);
+    font-weight: 700;
+  }
+
+  .bar-track {
+    height: 22px;
+    background: var(--sl-color-hairline);
+    border-radius: 4px;
+    overflow: hidden;
+  }
+
+  .bar-fill {
+    height: 100%;
+    background: var(--sl-color-accent);
+    border-radius: 4px;
+    width: 0%;
+    transition: width 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  .bar-fill.is-winner {
+    background: var(--sl-color-accent-high);
+  }
+  /* Fallback for Starlight themes that don't define accent-high */
+  .bar-fill.is-winner:not([style]) {
+    filter: brightness(1.15);
+  }
+
+  .bar-pct {
+    text-align: right;
+    font-variant-numeric: tabular-nums;
+    font-size: 0.82rem;
+    color: var(--sl-color-gray-3);
+    font-weight: 600;
+  }
+  .bar-pct.is-winner { color: var(--sl-color-accent); }
+
+  /* ── Total / voted message ───────────────────────────────── */
+  .poll-total {
+    font-size: 0.82rem;
+    color: var(--sl-color-gray-3);
+    margin: 0.25rem 0 0;
+  }
+
+  .poll-voted-msg {
+    margin-top: 0.5rem;
+    font-size: 0.82rem;
+    color: var(--sl-color-accent);
+    font-style: italic;
+  }
+  .poll-voted-msg[hidden] { display: none !important; }
+
+  /* ── Error ───────────────────────────────────────────────── */
+  .poll-error-msg {
+    color: var(--sl-color-red);
+    font-size: 0.9rem;
+    padding: 1rem;
+    border: 1px solid var(--sl-color-red);
+    border-radius: 8px;
+  }
+</style>
+
+<script>
+  import { createClient } from '@supabase/supabase-js';
+
+  // ── Supabase client ─────────────────────────────────────────────────────────
+  const SUPABASE_URL  = import.meta.env.PUBLIC_SUPABASE_URL;
+  const SUPABASE_ANON = import.meta.env.PUBLIC_SUPABASE_ANON_KEY;
+
+  const BREEDS = {
+    abyssinian: 'Abyssinian',
+    toyger:     'Toyger',
+    suphalak:   'Suphalak',
+    cornish_rex:'Cornish Rex',
+    somali:     'Somali (Ruddy)',
+  };
+
+  const BREED_ORDER = ['abyssinian', 'toyger', 'suphalak', 'cornish_rex', 'somali'];
+
+  // ── DOM refs ────────────────────────────────────────────────────────────────
+  const wrapper  = document.getElementById('breed-poll');
+  const loading  = document.getElementById('poll-loading');
+  const votePane = document.getElementById('poll-vote');
+  const resultsPane = document.getElementById('poll-results');
+  const barsContainer = document.getElementById('poll-bars');
+  const totalEl  = document.getElementById('poll-total');
+  const votedMsg = document.getElementById('poll-voted-msg');
+  const errorPane = document.getElementById('poll-error');
+
+  // ── Voter ID (persisted in localStorage + cookie) ──────────────────────────
+  const STORAGE_KEY = 'cat_poll_voter_id';
+
+  // Read cookie helper
+  function readCookie(name) {
+    const match = document.cookie.match(new RegExp('(?:^|; )' + name.replace(/([.$?*|{}()[\]\\/+^])/g, '\\$1') + '=([^;]*)'));
+    return match ? decodeURIComponent(match[1]) : null;
+  }
+
+  function setCookie(name, value, days = 365) {
+    const maxAge = days * 24 * 60 * 60;
+    // SameSite=Lax to allow top-level navigations, Path=/ for site-wide cookie
+    document.cookie = `${encodeURIComponent(name)}=${encodeURIComponent(value)}; Max-Age=${maxAge}; Path=/; SameSite=Lax`;
+  }
+
+  // v4 UUID generator (browser-only, no external deps)
+  function uuidv4() {
+    // crypto.getRandomValues is available in modern browsers
+    if (typeof crypto !== 'undefined' && crypto.getRandomValues) {
+      const buf = new Uint8Array(16);
+      crypto.getRandomValues(buf);
+
+      // Per RFC 4122 4.4, set version and clock_seq_hi_and_reserved bits
+      buf[6] = (buf[6] & 0x0f) | 0x40;
+      buf[8] = (buf[8] & 0x3f) | 0x80;
+
+      const hex = Array.from(buf).map((b) => b.toString(16).padStart(2, '0')).join('');
+      return `${hex.substr(0,8)}-${hex.substr(8,4)}-${hex.substr(12,4)}-${hex.substr(16,4)}-${hex.substr(20,12)}`;
+    }
+
+    // Fallback (less random) — should rarely run
+    return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, (c) => {
+      const r = (Math.random() * 16) | 0;
+      return (c === 'x' ? r : (r & 0x3) | 0x8).toString(16);
+    });
+  }
+
+  function getOrCreateVoterId() {
+    // Prefer cookie (so server/Edge Functions can read it later if needed)
+    let id = readCookie(STORAGE_KEY) || localStorage.getItem(STORAGE_KEY);
+    if (!id) {
+      id = uuidv4();
+      try {
+        localStorage.setItem(STORAGE_KEY, id);
+        setCookie(STORAGE_KEY, id, 365);
+      } catch (e) {
+        // localStorage can fail in some privacy modes; still set cookie
+        setCookie(STORAGE_KEY, id, 365);
+      }
+    }
+    return id;
+  }
+
+  // ── Show/hide helpers ───────────────────────────────────────────────────────
+  function show(el) { if (el) el.hidden = false; }
+  function hide(el) { if (el) el.hidden = true; }
+
+  function setState(state) {
+    hide(loading); hide(votePane); hide(resultsPane); hide(errorPane);
+    if (state === 'loading')  show(loading);
+    if (state === 'vote')     show(votePane);
+    if (state === 'results')  show(resultsPane);
+    if (state === 'error')    show(errorPane);
+  }
+
+  // ── Render results bar chart ───────────────────────────────────────────────
+  function renderResults(counts, total, userBreed) {
+    if (!barsContainer) return;
+    barsContainer.innerHTML = '';
+
+    const maxCount = Math.max(...Object.values(counts), 1);
+
+    BREED_ORDER.forEach((breed) => {
+      const count   = counts[breed] ?? 0;
+      const pct     = total > 0 ? Math.round((count / total) * 100) : 0;
+      const isWinner = count === maxCount && total > 0;
+
+      const row = document.createElement('div');
+      row.className = 'poll-bar-row';
+
+      const label = document.createElement('span');
+      label.className = `bar-label${isWinner ? ' is-winner' : ''}`;
+      label.textContent = BREEDS[breed];
+
+      const track = document.createElement('div');
+      track.className = 'bar-track';
+
+      const fill = document.createElement('div');
+      fill.className = `bar-fill${isWinner ? ' is-winner' : ''}`;
+
+      const pctLabel = document.createElement('span');
+      pctLabel.className = `bar-pct${isWinner ? ' is-winner' : ''}`;
+      pctLabel.textContent = `${pct}%`;
+
+      track.appendChild(fill);
+      row.append(label, track, pctLabel);
+      barsContainer.appendChild(row);
+
+      // Animate after a short delay so the transition fires
+      requestAnimationFrame(() => {
+        requestAnimationFrame(() => {
+          fill.style.width = `${pct}%`;
+        });
+      });
+    });
+
+    if (totalEl) {
+      totalEl.textContent = `${total.toLocaleString()} vote${total === 1 ? '' : 's'} cast`;
+    }
+
+    if (votedMsg) {
+      if (userBreed) {
+        votedMsg.textContent = `You voted for ${BREEDS[userBreed] ?? userBreed}. Thanks!`;
+        show(votedMsg);
+      } else {
+        votedMsg.textContent = '';
+        hide(votedMsg);
+      }
+    }
+  }
+
+  // ── Fetch current vote counts ───────────────────────────────────────────────
+  async function fetchCounts(supabase) {
+    const { data, error } = await supabase
+      .from('votes')
+      .select('breed');
+
+    if (error) throw error;
+
+    const counts = {};
+    BREED_ORDER.forEach((b) => (counts[b] = 0));
+    let total = 0;
+
+    (data ?? []).forEach(({ breed }) => {
+      if (breed in counts) {
+        counts[breed]++;
+        total++;
+      }
+    });
+
+    return { counts, total };
+  }
+
+  // ── Check if this voter has already voted (checks voter_id_uuid) ───────────
+  async function fetchUserVote(supabase, voterIdUuid) {
+    const { data } = await supabase
+      .from('votes')
+      .select('breed')
+      .eq('voter_id_uuid', voterIdUuid)
+      .maybeSingle();
+
+    return data?.breed ?? null;
+  }
+
+  // ── Submit a vote (write voter_id_uuid) ───────────────────────────────────
+  async function submitVote(supabase, breed, voterIdUuid) {
+    const { error } = await supabase
+      .from('votes')
+      .insert({ breed, voter_id_uuid: voterIdUuid });
+
+    if (error) throw error;
+  }
+
+  // ── Main init ───────────────────────────────────────────────────────────────
+  async function init() {
+    if (!SUPABASE_URL || !SUPABASE_ANON ||
+        SUPABASE_URL === 'https://your-project-ref.supabase.co') {
+      setState('error');
+      return;
+    }
+
+    const supabase = createClient(SUPABASE_URL, SUPABASE_ANON);
+    const voterId  = getOrCreateVoterId();
+
+    setState('loading');
+
+    try {
+      const existingVote = await fetchUserVote(supabase, voterId);
+
+      if (existingVote) {
+        // Already voted — show results
+        const { counts, total } = await fetchCounts(supabase);
+        setState('results');
+        renderResults(counts, total, existingVote);
+        return;
+      }
+
+      // Has not voted — show voting UI
+      setState('vote');
+
+      // Wire up vote buttons
+      const buttons = wrapper ? wrapper.querySelectorAll('.poll-option') : [];
+      buttons.forEach((btn) => {
+        btn.addEventListener('click', async () => {
+          const breed = btn.dataset.breed;
+
+          // Disable all buttons while submitting
+          buttons.forEach((b) => (b.disabled = true));
+          const originalText = btn.textContent;
+          btn.textContent = 'Submitting…';
+          setState('loading');
+
+          try {
+            await submitVote(supabase, breed, voterId);
+            // Persist their choice so the voted message is accurate
+            try { localStorage.setItem(`${STORAGE_KEY}_choice`, breed); } catch (e) {}
+            setCookie(STORAGE_KEY, voterId, 365);
+
+            const { counts, total } = await fetchCounts(supabase);
+            setState('results');
+            renderResults(counts, total, breed);
+          } catch (err) {
+            const isUniqueViolation =
+              err && (err.code === '23505' || (err.message && err.message.toLowerCase().includes('unique')));
+
+            if (isUniqueViolation) {
+              try {
+                const { counts, total } = await fetchCounts(supabase);
+                setState('results');
+                // Use persisted choice if available
+                let persistedChoice = null;
+                try { persistedChoice = localStorage.getItem(`${STORAGE_KEY}_choice`); } catch (e) {}
+                renderResults(counts, total, persistedChoice);
+                if (votedMsg) {
+                  votedMsg.textContent = 'It looks like you already voted from this browser. Thank you!';
+                  show(votedMsg);
+                }
+              } catch (e2) {
+                console.error('Failed to load counts after unique violation', e2);
+                setState('error');
+              }
+            } else {
+              console.error('Vote submission failed', err);
+              if (errorPane) {
+                const errMsgEl = errorPane.querySelector('.poll-error-msg');
+                if (errMsgEl) {
+                  errMsgEl.textContent =
+                    'Something went wrong submitting your vote. Please try again later.';
+                }
+              }
+              setState('error');
+            }
+          } finally {
+            // restore button state (in case user navigates back)
+            buttons.forEach((b) => (b.disabled = false));
+            btn.textContent = originalText;
+          }
+        });
+      });
+
+    } catch (e) {
+      console.error('Poll init failed', e);
+      setState('error');
+    }
+  }
+
+  // Run on script load
+  init();
+</script>

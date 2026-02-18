@@ -1,0 +1,25 @@
+---
+title: Community Poll
+description: Vote for your favourite breed and see how the community voted.
+sidebar:
+  label: Poll
+  order: 2
+tableOfContents: false
+---
+
+import BreedPoll from '../../components/BreedPoll.astro';
+
+Five breeds. One question. No going back.
+
+Cast your vote below — results update in real time as the community weighs in.
+
+<BreedPoll />
+
+---
+
+:::note[How voting works]
+One vote per browser. Your choice is remembered so results stay accurate
+across page refreshes and future visits. Votes are stored in
+[Supabase](https://supabase.com) and protected by Row Level Security — nobody
+can vote twice or delete other people's votes.
+:::
