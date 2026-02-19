@@ -363,6 +363,10 @@
       .from('votes')
       .select('breed');
 
+    if (error) {
+      console.error('Failed to fetch vote counts', error);
+    }
+
     if (error) throw error;
 
     const counts = {};
@@ -395,6 +399,10 @@
     const { error } = await supabase
       .from('votes')
       .insert({ breed, voter_id_uuid: voterIdUuid });
+
+    if (error) {
+      console.error('Failed to submit vote', { breed, voterIdUuid, error });
+    }
 
     if (error) throw error;
   }
